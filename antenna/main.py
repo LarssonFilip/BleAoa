@@ -27,6 +27,7 @@ def drawGraph():
     a0 = Antenna(115200,"COM3",0,0)
     a1 = Antenna(115200,"COM3",1,1)
     a2 = Antenna(115200,"COM3",2,2)
+
     a3 = Antenna(115200,"COM3",3,3)
     a4 = Antenna(115200,"COM3",4,4)
     a5 = Antenna(115200,"COM3",5,5)
@@ -82,7 +83,6 @@ def drawGraph():
     y8 = a7.y
 
 
-
     fig, ax = plt.subplots()
     square = patches.Rectangle((0, 0), 200, 300, edgecolor='orange', facecolor='none')
     ax.add_patch(square)
@@ -94,12 +94,12 @@ def drawGraph():
 
     plt.plot(x1,y1)
     plt.plot(x2,y2)
-    plt.plot(x3,y3)
-    plt.plot(x4,y4)
-    plt.plot(x5,y5)
-    plt.plot(x6,y6)
-    plt.plot(x7,y7)
-    plt.plot(x8,y8)
+#    plt.plot(x3,y3)
+#    plt.plot(x4,y4)
+#    plt.plot(x5,y5)
+#    plt.plot(x6,y6)
+#    plt.plot(x7,y7)
+#    plt.plot(x8,y8)
 
     
     # function to show the plot
