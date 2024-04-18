@@ -94,8 +94,8 @@ def drawGraph():
 
     plt.plot(x1,y1)
     plt.plot(x2,y2)
-#    plt.plot(x3,y3)
-#    plt.plot(x4,y4)
+    plt.plot(x3,y3)
+    plt.plot(x4,y4)
 #    plt.plot(x5,y5)
 #    plt.plot(x6,y6)
 #    plt.plot(x7,y7)
