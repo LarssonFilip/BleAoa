@@ -43,15 +43,14 @@ static struct bt_data ad[] = {
                   0x00, /* Eddystone-UID frame type */
                   0x00, /* TX Power */
                   'N', 'I', 'N', 'A', '-', 'B', '4', 'T', 'A', 'G', /* Namespace placeholder, will be replaced in init */
-                  'i', 'n', 's', 't', 'a', 'e', /* Instance Id placeholder, will be replaced in init */
+                  0xf7, 0xfa, 0x3c, 0x97, 0x5f, 0xcc, /* Instance Id placeholder, will be replaced in init */
                   0x00, /* reserved */
                   0x00 /* reserved */
                  )
 };
 
 const static struct bt_le_adv_param param =
-		BT_LE_ADV_PARAM_INIT(BT_LE_ADV_OPT_EXT_ADV |
-				     BT_LE_ADV_OPT_USE_NAME,
+		BT_LE_ADV_PARAM_INIT(BT_LE_ADV_OPT_EXT_ADV,
 				     BT_GAP_ADV_FAST_INT_MIN_2,
 				     BT_GAP_ADV_FAST_INT_MAX_2,
 				     NULL);

@@ -7,13 +7,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
+global antennas
+
 antennas:Antenna = []
+#antennas.append(Antenna(115200,"COM5",0,0)) 
 
-deg = 0
-
-
-def getCommand():
-    return input()
 
 # Test daat for plotting antenna calculations
 
@@ -21,67 +19,8 @@ def drawGraph():
     
  
     # Creating vectors X and Y
-
-    #xbox
     
-    a0 = Antenna(115200,"COM3",0,0)
-    a1 = Antenna(115200,"COM3",1,1)
-    a2 = Antenna(115200,"COM3",2,2)
-
-    a3 = Antenna(115200,"COM3",3,3)
-    a4 = Antenna(115200,"COM3",4,4)
-    a5 = Antenna(115200,"COM3",5,5)
-    a6 = Antenna(115200,"COM3",6,6)
-    a7 = Antenna(115200,"COM3",7,7)
-
-
-
-    a0.deg = 55
-    a1.deg = 80
-    a2.deg = 105
-    a3.deg = 25
-    a4.deg = 120
-    a5.deg = 90
-    a6.deg = 135
-    a7.deg = 120
-
-    a0.switch(a0.pos)
-    a1.switch(a1.pos)
-    a2.switch(a2.pos)
-    a3.switch(a3.pos)
-    a4.switch(a4.pos)
-    a5.switch(a5.pos)
-    a6.switch(a6.pos)
-    a7.switch(a7.pos)
-
-
-
-
-    x1 = a0.x
-    y1 = a0.y
-
-    x2 = a1.x
-    y2 = a1.y
-
-    x3 = a2.x
-    y3 = a2.y
-
-    x4 = a3.x
-    y4 = a3.y
-
-    x5 = a4.x
-    y5 = a4.y
-
-    x6 = a5.x
-    y6 = a5.y
-
-
-    x7 = a6.x
-    y7 = a6.y
-
-    x8 = a7.x
-    y8 = a7.y
-
+    
 
     fig, ax = plt.subplots()
     square = patches.Rectangle((0, 0), 200, 300, edgecolor='orange', facecolor='none')
@@ -90,16 +29,14 @@ def drawGraph():
     
     # Create the plot
     plt.xlim(-100, 300)
-    plt.ylim(-100, 400)     
-
+    plt.ylim(-100, 400)   
+    
+    x1 = antennas[0].x
+    y1 = antennas[0].y
+    x2 = antennas[1].x
+    y2 = antennas[1].y
     plt.plot(x1,y1)
     plt.plot(x2,y2)
-    plt.plot(x3,y3)
-    plt.plot(x4,y4)
-#    plt.plot(x5,y5)
-#    plt.plot(x6,y6)
-#    plt.plot(x7,y7)
-#    plt.plot(x8,y8)
 
     
     # function to show the plot
@@ -118,8 +55,8 @@ def addAntenna(string):
             createAntenna = False
             break  
     if createAntenna:
-        antenna = Antenna(parameters[0],parameters[1],parameters[2],id)
-        antennas.append(antenna)
+        print(parameters[0] + " " + parameters[1] + " " + parameters[2]+ " " + str(id))
+        antennas.append(Antenna(parameters[0],parameters[1],int(parameters[2]),id))
         
 
 
@@ -131,6 +68,7 @@ def switch(command):
         run()
     elif command == "3":
         print(antennas[0].port)
+        print(antennas[0].deg)
     elif command == "4":
         writeCommand()
     elif command == "5":
