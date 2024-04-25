@@ -10,7 +10,7 @@ import matplotlib.patches as patches
 global antennas
 
 
-measuredPower = -68
+measuredPower = -60
 N = 2
 
 antennas:Antenna = []

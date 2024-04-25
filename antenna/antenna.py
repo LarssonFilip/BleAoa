@@ -14,7 +14,7 @@ class Antenna:
 
     def __init__(self, baudrate, port, pos, id):
 
-        self.buff = []
+        self.buff = [20]
         self.buffix = 0
         self.pos = pos
         self.id = id
@@ -50,7 +50,8 @@ class Antenna:
                 if "UUDF" in string:
                     self.parameters = string.split(",")
                     self.convAngle(self.parameters[2])
-                    self.rssi = self.parameters[1]
+                    self.rssi = int(self.parameters[1])
+                    print(self.rssi)
                     self.switch()
                 else: 
                     print(string.strip())
@@ -68,8 +69,9 @@ class Antenna:
             self.buffix = 0
             self.buff[self.buffix] = int(angle)
         average = np.average(self.buff)
-        print(average)
-        self.deg = 90 - average
+        
+        self.deg = 90 - int(angle)
+        print(self.deg)
 
 
         
