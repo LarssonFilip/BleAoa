@@ -18,14 +18,32 @@ antennas:Antenna = []
 #antennas.append(Antenna(115200,"COM5",1,1)) 
 #antennas.append(Antenna(115200,"COM5",2,2)) 
 
+
+def setTagPos(pos):
+    global xTag 
+    global yTag 
+    xTag = 0
+    yTag = 0
+    if pos == "1":
+        xTag = 62.5
+        yTag = 237.5
+    elif pos == "2":
+        xTag = 137.5
+        yTag = 237.5
+    elif pos =="3":
+        xTag = 150
+        yTag = 125
+
+    
+
 # Test daat for plotting antenna calculations
 
 def drawGraph():
-    
     funcs = []
     xV = []
     yV = []
- 
+    xOff =0
+    yOff =0
     # Creating vectors X and Y
     x = np.linspace(-100, 400, 1000)
     
@@ -37,12 +55,17 @@ def drawGraph():
     plt.xlim(-100, 300)
     plt.ylim(-100, 400)
 
+    
+
+
     if(len(antennas) <= 1):
         
         plt.plot(antennas[0].x, antennas[0].y)
         distance = np.power(10, ((measuredPower-antennas[0].rssi)/(10*N)))
         print(distance)
+        
         #draw a circle
+        
         pos = antennas[0].pos
         if pos == 0:
             xOff = 0
@@ -68,21 +91,55 @@ def drawGraph():
         elif pos == 7:
             xOff = 200
             yOff = 0
-
         angles = np.linspace(0 * np.pi, 2 * np.pi, 100 )
         r = 100 * distance
         xs = r * np.cos(angles) + xOff
         ys = r * np.sin(angles) + yOff
         plt.plot(xs, ys, color = 'green')
+        plt.plot(xOff, yOff, 'ro', color='g')
 
+        
 
 
     else:
-
+        
         for antenna in antennas:
             y = antenna.y
             funcs.append(y)
             plt.plot(x,y)
+            pos = antenna.pos
+            if pos == 0:
+                xOff = 0
+                yOff = 300
+            elif pos == 1:
+                xOff = 100
+                yOff = 300
+            elif pos == 2:
+                xOff = 200
+                yOff = 300
+            elif pos == 3:
+                xOff = 0
+                yOff = 150
+            elif pos == 4:
+                xOff = 200
+                yOff = 150
+            elif pos == 5:
+                xOff = 0
+                yOff = 0
+            elif pos == 6:
+                xOff = 100
+                yOff = 0
+            elif pos == 7:
+                xOff = 200
+                yOff = 0
+
+            plt.plot(xOff, yOff, 'ro', color='g')
+            distance = np.power(10, ((measuredPower-antenna.rssi)/(10*N)))
+            angles = np.linspace(0 * np.pi, 2 * np.pi, 100 )
+            r = 100 * distance
+            xs = r * np.cos(angles) + xOff
+            ys = r * np.sin(angles) + yOff
+            plt.plot(xs, ys, color = 'green')
 
             
         for i, func in enumerate(funcs):
@@ -102,9 +159,12 @@ def drawGraph():
         print(xAverage)
         print(yAverage)
         plt.plot(xAverage, yAverage, 'ro', color='b')
+        
 
     # function to show the plot
-
+    print(xTag)
+    print(yTag)
+    plt.plot(xTag, yTag, 'ro', color='r')
     plt.show()
 
         #End of test Data
@@ -138,6 +198,8 @@ def switch(command):
         writeCommand()
     elif command == "5":
         drawGraph()
+    elif command == "6":
+        setTagPos(input())
     
 def writeCommand():
     run = True
@@ -166,7 +228,7 @@ if __name__ == "__main__":
     run = True
     
     while run:
-        print("Main Menu\n1:Add antenna\n2:Run\n3:List antenna\n4:Write Command\n5:Draw Graph")
+        print("Main Menu\n1:Add antenna\n2:Run\n3:List antenna\n4:Write Command\n5:Draw Graph\n6:tag Pos")
         command = input()
         if command == "exit":
             run = False
